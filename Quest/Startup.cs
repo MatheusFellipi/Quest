@@ -7,8 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Quest.Data;
-using Quest.Models;
-using Quest.Repositories;
 using System.Text;
 
 namespace Quest
@@ -27,10 +25,7 @@ namespace Quest
 		{
 			services.AddCors();
 			services.AddDbContext<DataContext> (opt => opt.UseInMemoryDatabase("database"));
-
 			services.AddScoped<DataContext, DataContext>();
-			services.AddScoped<IUserRepository, UserRepository>();
-
 			services.AddControllers();
 
 			var key = Encoding.ASCII.GetBytes(Settings.Secret);
