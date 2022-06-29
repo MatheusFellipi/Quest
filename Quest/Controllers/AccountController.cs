@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Quest.Data;
 using Quest.Entities;
 using Quest.Repositories;
@@ -28,7 +24,7 @@ namespace Quest.Controllers
 		[AllowAnonymous]
 		public async Task<dynamic> Autheticate([FromBody] User model)
 		{
-			
+
 			var user = await _repository.GetByEmail(model.Email);
 
 			if (user == null)
@@ -42,6 +38,11 @@ namespace Quest.Controllers
 				token = token
 			};
 		}
+
+		[HttpGet]
+		[Route("test")]
+		[Authorize]
+		public dynamic Manage() =>User;
 
 	}
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Quest.Data;
@@ -33,12 +34,14 @@ namespace Quest.Controllers
 
 		[HttpGet]
 		[Route("user/{id:int}")]
+		[Authorize]
 		public async Task<IEnumerable<Post>> GetByUser(int id)
 		{
 			return await _listUseCase.GetByUser(id);
 		}
 
 		[HttpPost]
+		[Authorize]
 		public async Task<ActionResult<Post>> Post([FromBody] Post model)
 		{
 			try
