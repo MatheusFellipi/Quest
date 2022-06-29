@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Quest.Data;
+using Quest.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,41 +14,33 @@ namespace Quest.Controllers
 	[ApiController]
 	public class PostController : ControllerBase
 	{
-		[HttpGet]
-		public async Task<ActionResult<List<Post>>> Get([FromServices] DataContext context)
+
+		private readonly IPostIRepository _repository;
+
+		public PostController(IPostIRepository repo)
 		{
-			var post = await context.Posts.Include(x=>x.User).ToListAsync();
-			return post;
+			_repository = repo;
 		}
 
-		[HttpGet("{id:int}")]
-		public async Task<ActionResult<Post>> GetById([FromServices] DataContext context, int id)
+		[HttpGet]
+		public async Task<IEnumerable<Post>> Get()
 		{
-			var post = await context.Posts.Include(x => x.User)
-				.AsNoTracking()
-				.FirstOrDefaultAsync(x=>x.Id == id);
-			return post;
+			return await _repository.GetPost();
 		}
 
 		[HttpGet]
 		[Route("user/{id:int}")]
-		public async Task<ActionResult<List<Post>>> GetByUser([FromServices] DataContext context, int id)
+		public async Task<List<Post>> GetByUser(int id)
 		{
-			var post = await context.Posts
-				.AsNoTracking()
-				.Where(x => x.Id_User == id)
-				.ToListAsync();
-
-			return post;
+			return await _repository.GetByUser(id);
 		}
 
 		[HttpPost]
-		public async Task<ActionResult<Post>> Post([FromServices] DataContext context,[FromBody] Post model)
+		public async Task<ActionResult<Post>> Post([FromBody] Post model)
 		{
 			if(ModelState.IsValid)
 			{
-				context.Posts.Add(model);
-				await context.SaveChangesAsync();
+				await _repository.NewPost(model);
 				return model;
 			}
 			else
