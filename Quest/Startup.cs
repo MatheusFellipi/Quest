@@ -7,7 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Quest.Data;
-using Quest.Models;
 using Quest.Repositories;
 using System.Text;
 
