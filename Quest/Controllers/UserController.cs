@@ -14,7 +14,7 @@ namespace Quest.Controllers
 	{
 
 
-		private IUserRepository _repository;
+		private readonly IUserRepository _repository;
 
 		public UserController(IUserRepository repo)
 		{
