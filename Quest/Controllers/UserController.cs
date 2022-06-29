@@ -14,11 +14,11 @@ namespace Quest.Controllers
 	[ApiController]
 	public class UserController : ControllerBase
 	{
-		private readonly CreateUseCase _createUseCase;
+		private readonly UserCreateUseCase _createUseCase;
 
 		public UserController(IUserRepository repo)
 		{
-			_createUseCase = new CreateUseCase(repo);
+			_createUseCase = new UserCreateUseCase(repo);
 		}
 
 		[HttpGet]
