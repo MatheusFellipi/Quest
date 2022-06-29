@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Quest.Data;
-using Quest.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

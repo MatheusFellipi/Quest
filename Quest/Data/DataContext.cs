@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Quest.Models;
-
+using Quest.Entities;
 
 namespace Quest.Data
 {
