@@ -14,11 +14,19 @@ namespace Quest.Controllers
 	[ApiController]
 	public class UserController : ControllerBase
 	{
-		[HttpGet]
-		public async Task<ActionResult<List<User>>> Get([FromServices] DataContext context)
+
+
+		private IUserRepository _repository;
+
+		public UserController(IUserRepository repo)
 		{
-			var user = await context.Users.ToListAsync();
-			return user;
+			_repository = repo;
+		}
+
+		[HttpGet]
+		public async Task<IEnumerable<User>> Get()
+		{
+			return await _repository.GetUser();
 		}
 
 		[HttpPost]
@@ -26,9 +34,7 @@ namespace Quest.Controllers
 		{
 			if(ModelState.IsValid)
 			{
-				context.Users.Add(model);
-				await context.SaveChangesAsync();
-				return model;
+				return await _repository.NewUser(model);
 			}
 			else
 			{
