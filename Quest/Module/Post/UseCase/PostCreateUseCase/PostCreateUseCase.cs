@@ -1,5 +1,4 @@
 ﻿using Quest.Entities;
-using Quest.Repositories;
 using System;
 using System.Threading.Tasks;
 
@@ -17,7 +16,7 @@ namespace Quest.UseCase
 		{
 			if (string.IsNullOrWhiteSpace(post.Description) || string.IsNullOrWhiteSpace(post.Title))
 				throw new Exception("preencher o dados");
-
+			
 			return await _repository.NewPost(post);
 		}
 

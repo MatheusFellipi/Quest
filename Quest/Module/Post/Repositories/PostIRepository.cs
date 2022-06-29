@@ -16,25 +16,28 @@ namespace Quest.Repositories
 		{
 			_repositorio = repositorio;
 		}
-
 		public void DeletePost(int id)
 		{
 			_repositorio.Remove(id);
 		}
-
+		public async Task<Post> GetById(int id)
+		{
+			return await _repositorio.Posts.AsNoTracking()
+				.Where(x => x.Id == id)
+				.FirstOrDefaultAsync();
+		}
 		public async Task<List<Post>> GetByUser(int id)
 		{
 			return await _repositorio.Posts
 				.AsNoTracking()
 				.Where(x => x.Id_User == id)
-				.ToListAsync(); 
+				.Where(x => !x.IsDelete)
+				.ToListAsync();
 		}
-
 		public async Task<IEnumerable<Post>> GetPost()
 		{
 			return await _repositorio.Posts.ToListAsync();
 		}
-
 		public async Task<Post> NewPost(Post post)
 		{
 			if (post.Id == 0)
@@ -43,12 +46,16 @@ namespace Quest.Repositories
 				await _repositorio.SaveChangesAsync();
 				return post;
 			}
-			return post;
+			else
+			{
+				return await UpdatePost(post);
+			}
 		}
-
-		public Post UpdatePost(Post user)
+		public async Task<Post> UpdatePost(Post post)
 		{
-			throw new NotImplementedException();
+			_repositorio.Posts.Update(post);
+			await _repositorio.SaveChangesAsync();
+			return post;
 		}
 	}
 }

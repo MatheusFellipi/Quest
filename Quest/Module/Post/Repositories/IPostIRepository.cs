@@ -9,8 +9,9 @@ namespace Quest
 	{
 		Task<IEnumerable<Post>> GetPost();
 		Task<List<Post>> GetByUser(int id);
+		Task<Post> GetById(int id);
 		Task<Post> NewPost(Post user);
-		Post UpdatePost(Post user);
+		Task<Post> UpdatePost(Post user);
 		void DeletePost(int id);
 	}
 }

@@ -18,18 +18,20 @@ namespace Quest.Controllers
 	{
 
 		private readonly PostCreateUseCase _postCreateUseCase;
-		private readonly PostListUseCase _listUseCase;
+		private readonly PostDeleteUseCase _postDeleteUseCase;
+		private readonly PostListUseCase _postListUseCase;
 
 		public PostController(IPostIRepository repo)
 		{
 			_postCreateUseCase = new PostCreateUseCase(repo);
-			_listUseCase = new PostListUseCase(repo);
+			_postDeleteUseCase = new PostDeleteUseCase(repo);
+			_postListUseCase = new PostListUseCase(repo);
 		}
 
 		[HttpGet]
 		public async Task<IEnumerable<Post>> Get()
 		{
-			return await _listUseCase.Get();
+			return await _postListUseCase.Get();
 		}
 
 		[HttpGet]
@@ -37,7 +39,23 @@ namespace Quest.Controllers
 		[Authorize]
 		public async Task<IEnumerable<Post>> GetByUser(int id)
 		{
-			return await _listUseCase.GetByUser(id);
+			return await _postListUseCase.GetByUser(id);
+		}
+
+		[HttpDelete]
+		[Authorize]
+		public async Task<ActionResult<dynamic>> Delete(int id)
+		{
+			await _postDeleteUseCase.Delete(id);
+			return StatusCode(200);
+		}
+
+		[HttpPut]
+		[Authorize]
+		public async Task<ActionResult<dynamic>> Up([FromBody] Post model)
+		{
+			await _postCreateUseCase.NewPost(model);
+			return StatusCode(200);
 		}
 
 		[HttpPost]
