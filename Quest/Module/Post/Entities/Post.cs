@@ -1,8 +1,4 @@
-﻿
-
-using Quest.Entities;
-
-namespace Quest
+﻿namespace Quest.Entities
 { 
 	public class Post
 	{
