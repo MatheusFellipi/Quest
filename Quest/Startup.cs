@@ -26,8 +26,10 @@ namespace Quest
 		{
 			services.AddCors();
 			services.AddDbContext<DataContext> (opt => opt.UseInMemoryDatabase("database"));
+
 			services.AddScoped<DataContext, DataContext>();
 			services.AddScoped<IUserRepository, UserRepository>();
+			services.AddScoped<IPostIRepository, PostIRepository>();
 
 			services.AddControllers();
 
