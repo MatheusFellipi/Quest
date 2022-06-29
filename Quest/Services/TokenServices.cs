@@ -4,8 +4,8 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
-using Quest.Models;
 using Microsoft.IdentityModel.Tokens;
+using Quest.Entities;
 
 namespace Quest.Services
 {

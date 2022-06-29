@@ -1,9 +1,9 @@
-﻿
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Quest.Models
+using Quest.Entities;
+
+namespace Quest.Repositories
 {
 	public interface IUserRepository 
 	{
