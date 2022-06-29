@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 
 using Quest.Entities;
 using Quest.Repositories;
+using Quest.UseCase;
+using System;
 
 namespace Quest.Controllers
 {
@@ -12,31 +14,29 @@ namespace Quest.Controllers
 	[ApiController]
 	public class UserController : ControllerBase
 	{
-
-
-		private readonly IUserRepository _repository;
+		private readonly CreateUseCase _createUseCase;
 
 		public UserController(IUserRepository repo)
 		{
-			_repository = repo;
+			_createUseCase = new CreateUseCase(repo);
 		}
 
 		[HttpGet]
-		public async Task<IEnumerable<User>> Get()
+		public async Task<ActionResult<IEnumerable<User>>> Get()
 		{
-			return await _repository.GetUser();
+			return Ok(await _createUseCase.GetUser());
 		}
 
 		[HttpPost]
-		public async Task<ActionResult<User>> Post([FromServices] DataContext context,[FromBody] User model)
+		public async Task<ActionResult<dynamic>> Post([FromBody] User model)
 		{
-			if(ModelState.IsValid)
+			try
 			{
-				return await _repository.NewUser(model);
+				return Ok(await _createUseCase.NewUser(model));
 			}
-			else
+			catch (Exception e)
 			{
-				return BadRequest(ModelState);
+				return StatusCode(400, e.Message);
 			}
 		}
 	}
