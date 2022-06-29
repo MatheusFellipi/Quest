@@ -18,8 +18,8 @@ namespace Quest.Services
 			var tokenDescription = new SecurityTokenDescriptor
 			{
 				 Subject = new ClaimsIdentity(new Claim[] { 
-					new Claim(ClaimTypes.Email,user.Email.ToString()),
-					new Claim(ClaimTypes.Role,user.Role.ToString())
+					new Claim(ClaimTypes.Name,user.Email.ToString()),
+					new Claim(ClaimTypes.Role,user.Role.ToString()),
 				 }),
 				 Expires = DateTime.UtcNow.AddHours(2),
 				 SigningCredentials =
