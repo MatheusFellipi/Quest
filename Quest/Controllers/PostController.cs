@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Quest.Data;
 using Quest.Entities;
+using Quest.UseCase;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,37 +16,38 @@ namespace Quest.Controllers
 	public class PostController : ControllerBase
 	{
 
-		private readonly IPostIRepository _repository;
+		private readonly PostCreateUseCase _postCreateUseCase;
+		private readonly ListUseCase _listUseCase;
 
 		public PostController(IPostIRepository repo)
 		{
-			_repository = repo;
+			_postCreateUseCase = new PostCreateUseCase(repo);
+			_listUseCase = new ListUseCase(repo);
 		}
 
 		[HttpGet]
 		public async Task<IEnumerable<Post>> Get()
 		{
-			return await _repository.GetPost();
+			return await _listUseCase.Get();
 		}
 
 		[HttpGet]
 		[Route("user/{id:int}")]
-		public async Task<List<Post>> GetByUser(int id)
+		public async Task<IEnumerable<Post>> GetByUser(int id)
 		{
-			return await _repository.GetByUser(id);
+			return await _listUseCase.GetByUser(id);
 		}
 
 		[HttpPost]
 		public async Task<ActionResult<Post>> Post([FromBody] Post model)
 		{
-			if(ModelState.IsValid)
+			try
 			{
-				await _repository.NewPost(model);
-				return model;
+				return await _postCreateUseCase.NewPost(model); 
 			}
-			else
+			catch (Exception e)
 			{
-				return BadRequest(ModelState);
+				return StatusCode(400, e.Message);
 			}
 		}
 	}
