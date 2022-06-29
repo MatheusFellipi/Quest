@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Quest.UseCase
 {
-	public class ListUseCase
+	public class PostListUseCase
 	{
 		private readonly IPostIRepository _repository;
-		public ListUseCase(IPostIRepository repo)
+		public PostListUseCase(IPostIRepository repo)
 		{
 			_repository = repo;
 		}

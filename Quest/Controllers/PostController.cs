@@ -18,12 +18,12 @@ namespace Quest.Controllers
 	{
 
 		private readonly PostCreateUseCase _postCreateUseCase;
-		private readonly ListUseCase _listUseCase;
+		private readonly PostListUseCase _listUseCase;
 
 		public PostController(IPostIRepository repo)
 		{
 			_postCreateUseCase = new PostCreateUseCase(repo);
-			_listUseCase = new ListUseCase(repo);
+			_listUseCase = new PostListUseCase(repo);
 		}
 
 		[HttpGet]
