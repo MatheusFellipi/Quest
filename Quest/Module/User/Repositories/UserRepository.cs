@@ -36,9 +36,11 @@ namespace Quest.Repositories
 			{
 				_repositorio.Users.Add(user);
 				await _repositorio.SaveChangesAsync();
+				user.Password = "";
 				return user;
 			}
 
+			user.Password = "";
 			return user;
 		}
 
