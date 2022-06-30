@@ -25,7 +25,10 @@ namespace Quest
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddCors();
-			services.AddDbContext<DataContext> (opt => opt.UseInMemoryDatabase("database"));
+			//services.AddDbContext<DataContext> (opt => opt.UseInMemoryDatabase("database"));
+
+			services.AddDbContext<DataContext>(opt =>
+			   opt.UseSqlServer(Configuration.GetConnectionString("SqlConnection")));
 
 			services.AddScoped<DataContext, DataContext>();
 			services.AddScoped<IUserRepository, UserRepository>();
