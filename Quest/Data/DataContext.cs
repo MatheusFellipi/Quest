@@ -5,8 +5,9 @@ namespace Quest.Data
 {
 	public class DataContext : DbContext
 	{
-		public DataContext(DbContextOptions<DataContext> opt) : base(opt) {
-			this.Database.EnsureCreated();
+		public DataContext(DbContextOptions<DataContext> opt) : base(opt)
+		{
+
 		}
 
 		public DbSet<User> Users { get; set; }
