@@ -22,21 +22,20 @@ A `API` esta hospedada na `AZURE` junto com o banco de dados.
 -  API https://quest20220630122010.azurewebsites.net
 
   - Cadastrar um usuário `/api/user`
-
+  	
     ```
       	Email: string, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"
 	Password: string, maior que 6 caractere 
 	role: string
     ```
-    
-    ```
-      //200
-
-	id: int,
-	Email: string,
-	Password: string,
-	role: string
-    ```
+    -200
+    	
+    	```
+		id: int,
+		Email: string,
+		Password: string,
+		role: string
+    	```
   
   - Logar na api `/api/account/login`
     
@@ -45,19 +44,19 @@ A `API` esta hospedada na `AZURE` junto com o banco de dados.
 	password: string,
     ```
 
-    ```
-      //200
-      	user: user
-	token: JTW bearer token
-    ```
+	- 200
+    	```
+      		user: user
+		token: JTW bearer token
+    	```
 
   - pegar todos os post do usuário `api/post/user/:id_user` `Header authorization`
+  	- 200
   
-   ```
-     //200
-      	 id: int,
-	 title: string,
-	 description: string,
-   	 active: string,
-	 id_User: 1,
-   ```
+  	 ```
+      		 id: int,
+		 title: string,
+		 description: string,
+   		 active: string,
+		 id_User: 1,
+  	 ```
