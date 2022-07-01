@@ -41,11 +41,5 @@ namespace Quest.Controllers
 				token = token
 			};
 		}
-
-		[HttpGet]
-		[Route("test")]
-		[Authorize]
-		public dynamic Manage() =>User;
-
 	}
 }
