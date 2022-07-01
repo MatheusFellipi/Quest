@@ -43,6 +43,8 @@ namespace Quest.Controllers
 		}
 
 		[HttpDelete]
+		[Route("{id:int}")]
+		[Authorize]
 		[Authorize]
 		public async Task<ActionResult<dynamic>> Delete(int id)
 		{
@@ -51,6 +53,7 @@ namespace Quest.Controllers
 		}
 
 		[HttpPut]
+		[Route("{id:int}")]
 		[Authorize]
 		public async Task<ActionResult<dynamic>> Up([FromBody] Post model)
 		{
