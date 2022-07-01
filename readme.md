@@ -47,17 +47,15 @@ A `API` esta hospedada na `AZURE` junto com o banco de dados.
 
     ```
       //200
-
       	user: user
 	token: JTW bearer token
     ```
 
   - pegar todos os post do usuário `api/post/user/:id_user` `Header authorization`
-
+  
    ```
      //200
-   
-   	 id: int,
+      	 id: int,
 	 title: string,
 	 description: string,
    	 active: string,
