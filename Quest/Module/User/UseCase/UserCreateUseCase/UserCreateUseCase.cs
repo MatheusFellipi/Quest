@@ -2,9 +2,9 @@
 using Quest.Repositories;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Quest.Services;
 
 namespace Quest.UseCase
 {
@@ -38,6 +38,9 @@ namespace Quest.UseCase
 				throw new Exception("Senha invalido");
 
 
+			user.Password = HashValue.GenerateHash(user.Password);
+		
+
 			return await _repository.NewUser(user);
 		}
 
@@ -65,7 +68,5 @@ namespace Quest.UseCase
 			if (user == null) return false;
 			else return true;
 		}
-
-
 	}
 }
