@@ -25,41 +25,41 @@ A `API` esta hospedada na `AZURE` junto com o banco de dados.
 
     ```
       	Email: string, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"
-	      Password: string, maior que 6 caractere 
-		    role: string
+	Password: string, maior que 6 caractere 
+	role: string
     ```
     
     ```
       //200
 
-	    id: int,
-	    Email: string,
-	    Password: string,
-	    role: string
+	id: int,
+	Email: string,
+	Password: string,
+	role: string
     ```
   
   - Logar na api `/api/account/login`
     
     ```
-	    email: string,
-	    password: string,
+	email: string,
+	password: string,
     ```
 
     ```
       //200
 
-      user: user
-	    token: JTW bearer token
+      	user: user
+	token: JTW bearer token
     ```
 
   - pegar todos os post do usuário `api/post/user/:id_user` `Header authorization`
 
-  ```
-    //200
-
-    id: int,
-		title: string,
-		description: string,
-		active: string,
-		id_User: 1,
-  ```
+   ```
+     //200
+   
+   	 id: int,
+	 title: string,
+	 description: string,
+   	 active: string,
+	 id_User: 1,
+   ```
