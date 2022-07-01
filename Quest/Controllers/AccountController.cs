@@ -30,6 +30,9 @@ namespace Quest.Controllers
 			if (user == null)
 				return NotFound(new { message = "Usuario ou senha invalido" });
 
+			if (user.Password != HashValue.GenerateHash(model.Password))
+				return NotFound(new { message = "Usuario ou senha invalido" });
+
 			var token = TokenServices.GenerateToken(user);
 			user.Password = "";
 			return new
